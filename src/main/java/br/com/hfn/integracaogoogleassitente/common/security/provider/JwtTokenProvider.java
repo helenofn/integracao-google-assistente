@@ -38,7 +38,7 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class JwtTokenProvider {
 
-	private static final String URL_GOOGLE_API_OAUTH2_CERTS = "";
+	private static final String URL_GOOGLE_API_OAUTH2_CERTS = "https://www.googleapis.com/oauth2/v3/certs";
 	//private String projectId = "";
 	
 	@Value("${google.actions.project.iss:https://accounts.google.com}")
