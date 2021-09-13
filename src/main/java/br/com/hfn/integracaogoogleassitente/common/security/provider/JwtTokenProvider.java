@@ -42,9 +42,9 @@ public class JwtTokenProvider {
 	//private String projectId = "";
 	
 	@Value("${google.actions.project.iss:https://accounts.google.com}")
-	private String projectIss = "";
-	@Value("${google.actions.project.iss:https://accounts.google.com}")
-	private String projectAud = "859623945114-ef03e7g7i6c668j2044aluv4hjigemkb.apps.googleusercontent.com";
+	private String projectIss;
+	@Value("${google.actions.project.iss:859623945114-ef03e7g7i6c668j2044aluv4hjigemkb.apps.googleusercontent.com}")
+	private String projectAud;
 	
 	
 	public GAUserIdTokenDTO getGAUserFromToken(HttpServletRequest request) {
