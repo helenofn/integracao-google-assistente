@@ -43,7 +43,7 @@ public class JwtTokenProvider {
 	
 	@Value("${google.actions.project.iss:https://accounts.google.com}")
 	private String projectIss;
-	@Value("${google.actions.project.iss:859623945114-ef03e7g7i6c668j2044aluv4hjigemkb.apps.googleusercontent.com}")
+	@Value("${google.actions.project.aud:859623945114-ef03e7g7i6c668j2044aluv4hjigemkb.apps.googleusercontent.com}")
 	private String projectAud;
 	
 	
@@ -162,9 +162,12 @@ public class JwtTokenProvider {
 	private boolean isValidToken(GAUserIdTokenDTO user) {
 		if(!projectAud.equalsIgnoreCase(user.getAud())) {
 			log.error("aud divergente.");
+			log.error("aud: " + user.getAud());
 			throw new RuntimeException("aud divergente.");
-		}else if(projectIss.equalsIgnoreCase(user.getIss())) {
+		}else if(!projectIss.equalsIgnoreCase(user.getIss())) {
 			log.error("iss divergente.");
+			log.error("iss: " + user.getIss());
+			log.error("ProjectIss: " + projectIss);
 			throw new RuntimeException("iss divergente.");
 		}
 		return true;
