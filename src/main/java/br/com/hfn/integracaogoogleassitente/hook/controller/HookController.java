@@ -40,22 +40,21 @@ public class HookController {
 			return marcarPonto(user, true, gaRequest);
 		}else if("marcarPontoSaida".equalsIgnoreCase(handler)) {
 			return marcarPonto(user, false, gaRequest);
-		}else {
-			
 		}
 		
-		
-		return null;
+		GAResponse response = GAResponseUtil.createResponse(gaRequest);
+		response.setScene(new Scene(null, new NextScene("ErroFatal"),null,null));
+		return response;
 	}
 	
 	private GAResponse perguntarMarcacaoPonto(GAUserIdTokenDTO user, GARequest gaRequest) {
 		
-		String dataHoraAtual = DateTimeUtil.getDataHoraCorrenteAsString(DateTimeUtil.DH_FRMT_DDMM_HHMM);
+		String horaAtual = DateTimeUtil.getDataHoraCorrenteAsString(DateTimeUtil.DH_FRMT_HHMM);
 		
 		StringBuilder msg = new StringBuilder();
 		msg.append(user.getPrimeiroNome());
 		msg.append(", encontramos o seu cadastro. São ");
-		msg.append(dataHoraAtual);
+		msg.append(horaAtual);
 		msg.append(", o que gostaria de fazer, marcar o ponto de entrada ou saída?");
 		
 		GAResponse response = GAResponseUtil.createResponse(gaRequest);
@@ -69,12 +68,12 @@ public class HookController {
 	
 	private GAResponse marcarPonto(GAUserIdTokenDTO user, boolean isEntrada, GARequest gaRequest) {
 		
-		String dataHoraAtual = DateTimeUtil.getDataHoraCorrenteAsString(DateTimeUtil.DH_FRMT_DDMM_HHMM);
+		String horaAtual = DateTimeUtil.getDataHoraCorrenteAsString(DateTimeUtil.DH_FRMT_HHMM);
 		
 		StringBuilder msg = new StringBuilder();
 		msg.append(user.getPrimeiroNome());
 		msg.append(", a marcação foi realizada com sucesso para as ");
-		msg.append(dataHoraAtual);
+		msg.append(horaAtual);
 		msg.append(".");
 		
 		GAResponse response = GAResponseUtil.createResponse(gaRequest);
